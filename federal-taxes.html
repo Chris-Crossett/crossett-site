@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+<title>Individual Federal Income Tax — Chris Crossett</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.7/chart.umd.min.js"></script>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="index.html" class="nav-brand">Chris <span>Crossett</span></a><button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button><ul class="nav-links"><li class="nav-dropdown"><a href="#" class="nav-dropdown-trigger">Government</a><div class="nav-dropdown-menu"><a href="federal-reform.html">Federal Reform Overview</a><a href="federal-taxes.html">Federal Taxes</a><a href="national-sales-tax.html">National Sales Tax</a><a href="federal-spending.html">Federal Spending</a><a href="non-financial-changes.html">Non-Financial Reforms</a><a href="privatization.html">Privatization</a><a href="state-govt.html">State Government</a><a href="county-govt.html">County Government</a><a href="local-govt.html">Local Government</a></div></li><li class="nav-dropdown"><a href="#" class="nav-dropdown-trigger">Finance</a><div class="nav-dropdown-menu"><a href="mortgages.html">Mortgage Reform</a><a href="real-estate.html">Real Estate</a><a href="daily-finance.html">Daily Finance</a></div></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div></nav>
+
+<section class="page-hero"><div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> <a href="federal-reform.html">Government</a> <span>›</span> Federal Taxes</div>
+<div class="hero-eyebrow animate-in">Tax Reform</div>
+<h1 class="animate-in delay-1">Individual Federal Income Tax</h1>
+<p class="animate-in delay-2">Replacing all federal taxes with a simplified system that eliminates fraud and reduces overhead.</p>
+</div></section>
+
+<section class="article"><div class="container"><div class="article-content">
+
+<div class="stat-row">
+  <div class="stat-item"><div class="number">$5.23T</div><div class="desc">FY2025 Total Federal Revenue</div></div>
+  <div class="stat-item"><div class="number">$2.66T</div><div class="desc">Individual Income Tax</div></div>
+  <div class="stat-item"><div class="number">$1.75T</div><div class="desc">Social Insurance / Payroll</div></div>
+</div>
+
+<!-- Current Revenue Breakdown Chart -->
+<div class="chart-container">
+  <div class="chart-title">Current Federal Revenue Breakdown (FY2025)</div>
+  <div class="chart-subtitle">Total: $5.23 Trillion — Source: U.S. Treasury</div>
+  <canvas id="revenueDonut"></canvas>
+  <div class="chart-source">Data: U.S. Treasury Combined Statement FY2025</div>
+</div>
+
+<h2>The Problem: A Complex, Costly Tax System</h2>
+<p>The current federal tax code runs tens of thousands of pages. It requires individuals and businesses to spend billions of hours and dollars on compliance. The IRS employs tens of thousands of workers to enforce it. And despite all of this complexity, fraud and misconduct persist.</p>
+
+<div class="concept-block"><div class="label">Proposed Solution</div><div class="value">Replace the entire tax code with a single 10% National Sales Tax on consumer purchases (groceries exempt). One tax. One rate. No loopholes.</div></div>
+
+<!-- Current vs Proposed Chart -->
+<div class="chart-container">
+  <div class="chart-title">Current System vs. Proposed System</div>
+  <div class="chart-subtitle">Simplification from 6 tax categories to 1</div>
+  <canvas id="comparisonBar"></canvas>
+</div>
+
+<hr>
+
+<h2>Individual Income Tax → Eliminated</h2>
+<div class="stat-row">
+  <div class="stat-item"><div class="number">$2.66T</div><div class="desc">Current: Individual Income Tax</div></div>
+  <div class="stat-item"><div class="number">50.7%</div><div class="desc">Share of Federal Revenue</div></div>
+  <div class="stat-item"><div class="number">$0</div><div class="desc">Proposed: Replaced by 10% NST</div></div>
+</div>
+<ul>
+  <li>All individual income taxes eliminated — replaced by the 10% National Sales Tax on consumer purchases</li>
+  <li>No more filing individual income taxes</li>
+  <li>Easier for employers to pay individuals (not having to calculate income tax)</li>
+  <li>IRS not needed for tax compliance — massive administrative savings</li>
+  <li><strong>Exempt all Groceries</strong> (Food &amp; Beverages) to protect families</li>
+</ul>
+
+<hr>
+
+<h2>Payroll Taxes → Eliminated</h2>
+<div class="stat-row">
+  <div class="stat-item"><div class="number">$1.75T</div><div class="desc">Current: Social Insurance Taxes</div></div>
+  <div class="stat-item"><div class="number">33.4%</div><div class="desc">Share of Federal Revenue</div></div>
+  <div class="stat-item"><div class="number">$0</div><div class="desc">Proposed: Eliminated</div></div>
+</div>
+<ul>
+  <li>Social Security to be considered part of debt and paid with dedicated allocations from the 10% National Sales Tax</li>
+  <li>Federal Government to refund all prior contributions into a General Retirement Account</li>
+  <li>Priority given to those already in or near retirement</li>
+</ul>
+
+<hr>
+
+<h2>Excise Taxes → Eliminated</h2>
+<div class="stat-row">
+  <div class="stat-item"><div class="number">$106B</div><div class="desc">Current: Excise Taxes</div></div>
+  <div class="stat-item"><div class="number">2.0%</div><div class="desc">Share of Federal Revenue</div></div>
+</div>
+<p>Eliminate all excise taxes. The states are closer to assess the needs of their state as it relates to Gas, Alcohol, Tobacco, and Airports.</p>
+
+<hr>
+
+<h2>Corporate Taxes → Eliminated</h2>
+<div class="stat-row">
+  <div class="stat-item"><div class="number">$452B</div><div class="desc">Current: Corporate Income Tax</div></div>
+  <div class="stat-item"><div class="number">$0</div><div class="desc">Proposed: Eliminated Entirely</div></div>
+</div>
+<p>The corporate income tax is eliminated entirely. Corporations pay the 10% National Sales Tax on their consumer purchases like everyone else — no separate corporate tax, no complex deductions, no loopholes.</p>
+
+<hr>
+
+<div class="concept-block"><div class="label">Revenue Basis</div><div class="value">Based on ~$20T in annual U.S. personal consumption expenditures (BEA, Q4 2025), minus ~$2T in exempt groceries, a 10% tax on the ~$18T taxable base generates approximately $1.8T annually.</div></div>
+
+<p><strong>One tax. One rate. No loopholes. These plans eliminate the entire current tax code and replace it with the simplest possible system — a single 10% National Sales Tax. It also takes out, for the most part, the ability for fraud and misconduct.</strong></p>
+
+<div class="post-nav">
+  <a href="federal-reform.html"><div class="post-nav-label">← Previous</div><div class="post-nav-title">Federal Reform Overview</div></a>
+  <a href="national-sales-tax.html"><div class="post-nav-label">Next →</div><div class="post-nav-title">National Sales Tax</div></a>
+</div>
+
+</div></div></section>
+
+<footer class="footer"><div class="footer-inner"><div><div class="footer-brand">Chris Crossett</div><p>Ideas for major societal leaps forward.</p></div><ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="federal-reform.html">Government</a></li><li><a href="mortgages.html">Finance</a></li></ul></div></footer>
+<script src="js/main.js"></script>
+<script>
+// Color palette
+const colors = {
+  navy: '#0e3348', blue: '#1a5276', teal: '#148f77', gold: '#b8860b',
+  red: '#c0392b', gray: '#6e7681', lightBlue: '#5dade2', green: '#27ae60',
+  orange: '#e67e22', purple: '#8e44ad'
+};
+
+// Revenue Donut
+new Chart(document.getElementById('revenueDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Individual Income Tax — $2,656B', 'Social Insurance / Payroll — $1,748B', 'Corporate Income Tax — $452B', 'Customs Duties — $195B', 'Excise Taxes — $106B', 'Estate, Gift & Other — $78B'],
+    datasets: [{
+      data: [2656, 1748, 452, 195, 106, 78],
+      backgroundColor: [colors.navy, colors.blue, colors.gold, colors.teal, colors.orange, colors.gray],
+      borderWidth: 2, borderColor: '#fff', hoverOffset: 8
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    cutout: '55%',
+    plugins: {
+      legend: { position: 'bottom', labels: { padding: 16, font: { family: "'DM Sans', sans-serif", size: 12 }, usePointStyle: true, pointStyle: 'rectRounded' } },
+      tooltip: { callbacks: { label: function(ctx) { return ctx.label + ' (' + (ctx.parsed / 52.35).toFixed(1) + '%)'; } } }
+    }
+  }
+});
+
+// Comparison Bar Chart
+new Chart(document.getElementById('comparisonBar'), {
+  type: 'bar',
+  data: {
+    labels: ['Individual Income', 'Payroll / Social Ins.', 'Corporate Income', 'Excise', 'Customs & Other', '10% National Sales Tax'],
+    datasets: [
+      { label: 'Current System ($B)', data: [2656, 1748, 452, 106, 273, 0], backgroundColor: colors.navy, borderRadius: 4 },
+      { label: 'Proposed System ($B)', data: [0, 0, 0, 0, 0, 1800], backgroundColor: colors.gold, borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: true,
+    indexAxis: 'y',
+    plugins: {
+      legend: { position: 'top', labels: { font: { family: "'DM Sans', sans-serif", size: 12 }, usePointStyle: true, pointStyle: 'rectRounded', padding: 16 } },
+      tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': $' + ctx.parsed.x + 'B'; } } }
+    },
+    scales: {
+      x: { title: { display: true, text: 'Billions ($)', font: { family: "'DM Sans', sans-serif" } }, grid: { color: '#e8e5e0' } },
+      y: { grid: { display: false }, ticks: { font: { family: "'DM Sans', sans-serif", size: 11 } } }
+    }
+  }
+});
+</script>
+</body>
+</html>
