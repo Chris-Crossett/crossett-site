@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://chris.crossett.net/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://chris.crossett.net/federal-reform.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://chris.crossett.net/federal-taxes.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://chris.crossett.net/national-sales-tax.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://chris.crossett.net/federal-spending.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://chris.crossett.net/non-financial-changes.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://chris.crossett.net/privatization.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://chris.crossett.net/state-govt.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://chris.crossett.net/county-local-govt.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://chris.crossett.net/mortgages.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://chris.crossett.net/real-estate.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://chris.crossett.net/daily-finance.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://chris.crossett.net/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://chris.crossett.net/contact.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>
