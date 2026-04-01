@@ -149,3 +149,44 @@ a:hover { color: var(--color-gold); }
 .debt-slider-container input[type="range"] { width: 100%; margin: var(--space-sm) 0; accent-color: var(--color-accent); }
 .debt-result { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-accent); text-align: center; margin-top: var(--space-md); }
 .debt-result-sub { font-size: 0.9rem; color: var(--color-ink-muted); text-align: center; }
+
+/* 10-Year Plan Phase Cards */
+.phase-card { background: var(--color-surface-card); border: 1px solid var(--color-border-light); border-radius: var(--radius-lg); padding: var(--space-xl); position: relative; overflow: hidden; margin-bottom: var(--space-xl); }
+.phase-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; }
+.phase-gold::before { background: var(--color-gold); }
+.phase-navy::before { background: var(--color-accent-deep); }
+.phase-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 12px; border-radius: var(--radius-sm); margin-bottom: var(--space-md); }
+.phase-gold .phase-badge { background: var(--color-gold-soft); color: var(--color-gold); }
+.phase-navy .phase-badge { background: var(--color-accent-light); color: var(--color-accent-deep); }
+.phase-card h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-ink); margin-bottom: var(--space-sm); }
+.phase-intro { font-size: 0.95rem; color: var(--color-ink-muted); margin-bottom: var(--space-lg); }
+.phase-outcomes { list-style: none; padding: 0; margin-top: var(--space-lg); }
+.phase-outcomes li { position: relative; padding-left: 20px; margin-bottom: var(--space-sm); font-size: 0.88rem; color: var(--color-ink-soft); }
+.phase-outcomes li::before { content: '\2713'; position: absolute; left: 0; color: var(--color-gold); font-weight: 700; }
+.phase-navy .phase-outcomes li::before { color: var(--color-accent); }
+
+/* Pro-forma table scroll wrapper */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: var(--space-lg) 0; }
+.table-scroll table { min-width: 600px; width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.table-scroll th { background: var(--color-accent-deep); color: var(--color-white); padding: var(--space-sm) var(--space-md); text-align: right; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+.table-scroll th:first-child { text-align: left; }
+.table-scroll td { padding: var(--space-sm) var(--space-md); border-bottom: 1px solid var(--color-border-light); color: var(--color-ink-soft); text-align: right; white-space: nowrap; }
+.table-scroll td:first-child { text-align: left; font-weight: 500; color: var(--color-ink); }
+.table-scroll tbody tr:hover { background: var(--color-surface-alt); }
+.table-scroll tbody tr:last-child td { font-weight: 600; color: var(--color-ink); }
+.table-scroll .row-negative td { color: var(--color-ink-muted); }
+.table-scroll .row-highlight td { background: rgba(184,134,11,0.06); font-weight: 600; color: var(--color-ink); }
+.table-scroll .row-highlight-navy td { background: rgba(26,82,118,0.06); font-weight: 600; color: var(--color-ink); }
+
+/* Milestone timeline */
+.milestone-list { list-style: none; padding: 0; margin: var(--space-lg) 0; }
+.milestone-list li { display: flex; align-items: baseline; gap: var(--space-md); padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border-light); font-size: 0.9rem; color: var(--color-ink-soft); }
+.milestone-list li:last-child { border-bottom: none; }
+.milestone-year { font-family: var(--font-mono); font-weight: 600; font-size: 0.8rem; color: var(--color-accent-deep); min-width: 110px; }
+.milestone-check { color: var(--color-gold); font-weight: 700; margin-left: auto; min-width: 20px; text-align: right; }
+
+/* Interest case numbered list */
+.interest-case { counter-reset: interest-item; list-style: none; padding: 0; margin: var(--space-md) 0; }
+.interest-case li { counter-increment: interest-item; position: relative; padding-left: 32px; margin-bottom: var(--space-md); font-size: 0.9rem; color: var(--color-ink-soft); }
+.interest-case li::before { content: counter(interest-item); position: absolute; left: 0; top: 2px; width: 22px; height: 22px; border-radius: 50%; background: var(--color-accent-deep); color: var(--color-white); font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.interest-case li strong { color: var(--color-ink); }
