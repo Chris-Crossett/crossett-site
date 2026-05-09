@@ -9,6 +9,13 @@ document.querySelectorAll('.nav-dropdown-trigger').forEach(trigger => {
     e.preventDefault();
     if (window.innerWidth <= 900) {
       const dd = trigger.closest('.nav-dropdown');
+      // Close any OTHER open dropdowns before toggling this one
+      document.querySelectorAll('.nav-dropdown.open').forEach(other => {
+        if (other !== dd) {
+          other.classList.remove('open');
+          other.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+        }
+      });
       const open = dd?.classList.toggle('open');
       trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
