@@ -431,6 +431,7 @@
     }
 
     const planPointRadius = labels.map(y => (y === '2030' || y === '2069') ? 5 : 0);
+    const sqPointRadius = labels.map(y => y === '2069' ? 5 : 0);
 
     new Chart(document.getElementById('debtChoiceChart'), {
       type: 'line',
@@ -445,7 +446,10 @@
             borderDash: [6, 4],
             fill: false,
             tension: 0.25,
-            pointRadius: 0,
+            pointRadius: sqPointRadius,
+            pointBackgroundColor: colors.red,
+            pointBorderColor: colors.red,
+            pointBorderWidth: 2,
             pointHoverRadius: 5
           },
           {
@@ -489,6 +493,22 @@
                 borderWidth: 1,
                 borderRadius: 4,
                 color: '#0e3348',
+                font: { family: "'DM Sans', sans-serif", size: 11, weight: '600' },
+                padding: { top: 6, bottom: 6, left: 8, right: 8 },
+                position: { x: 'center', y: 'center' }
+              },
+              sqEndLabel: {
+                type: 'label',
+                xValue: '2069',
+                yValue: sqData[sqData.length - 1],
+                yAdjust: 30,
+                xAdjust: -90,
+                content: ['~$300T+'],
+                backgroundColor: 'rgba(192,57,43,0.10)',
+                borderColor: colors.red,
+                borderWidth: 1,
+                borderRadius: 4,
+                color: colors.red,
                 font: { family: "'DM Sans', sans-serif", size: 11, weight: '600' },
                 padding: { top: 6, bottom: 6, left: 8, right: 8 },
                 position: { x: 'center', y: 'center' }
