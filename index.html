@@ -35,6 +35,8 @@
     }
   }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 </head>
 <body>
 
@@ -76,13 +78,34 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container hero-content">
-      <div class="hero-eyebrow animate-in">Policy &amp; Finance</div>
-      <h1 class="animate-in delay-1">Ideas for Major <em>Societal Leaps</em> Forward</h1>
-      <p class="hero-subtitle animate-in delay-2">Practical proposals for fiscal responsibility at every level of government, and innovations in financial technology that put individuals first.</p>
+      <div class="hero-eyebrow animate-in">The Thesis</div>
+      <h1 class="animate-in delay-1">From <em>$39 Trillion</em> to <em>Zero</em> by 2069</h1>
+      <p class="hero-subtitle animate-in delay-2">A 10% National Sales Tax replaces every federal tax. Entitlements are bought out and sunset. America runs surpluses — and pays off the national debt.</p>
       <a href="federal-reform.html" class="hero-cta animate-in delay-3">
         Explore the Framework
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
+    </div>
+  </section>
+
+  <!-- The Choice: Two Paths Chart -->
+  <section class="section">
+    <div class="container">
+      <div class="chart-container">
+        <div class="chart-title">The Choice: Two Paths for the National Debt</div>
+        <div class="chart-subtitle">Status quo (CBO baseline) vs. the 10% NST plan, 2026–2069</div>
+        <canvas id="debtChoiceChart"></canvas>
+        <div class="chart-source">Status quo: CBO, The Long-Term Budget Outlook: 2026 to 2056 (March 2026), translated to gross federal debt. Plan: per Phase 1–2 model below. 2057–2069 extrapolated.</div>
+      </div>
+      <h3 style="font-size:1rem;margin-top:var(--space-lg);margin-bottom:var(--space-sm);color:var(--color-ink);">Assumptions &amp; data sources</h3>
+      <ul style="font-size:0.9rem;color:var(--color-ink-soft);line-height:1.65;max-width:var(--content-width);">
+        <li><strong>Status quo data:</strong> CBO, <em>The Long-Term Budget Outlook: 2026 to 2056</em> (March 2026). Debt held by the public projected at 101% of GDP (FY2026) → 108% (2030) → 120% (2036) → 144% (2046) → 175% (2056). Translated to gross federal debt by adding intragovernmental holdings of $9T (FY2026) declining linearly to $0 by FY2034 (Social Security trust fund depletion).</li>
+        <li><strong>GDP baseline:</strong> Nominal GDP $29.7T (FY2026) growing at 3.7%/yr, back-solved from CBO's 2025–2055 LTBO (per-year nominal GDP not extracted from the 2026 supplemental tables). <em>Sensitivity:</em> at 3.4%/yr growth, status-quo debt in 2056 would be ~$140T instead of $154T — direction unchanged.</li>
+        <li><strong>Status quo, 2057–2069:</strong> Extrapolated at the 2046–2056 nominal growth rate (~5.7%/yr). CBO does not publish projections beyond FY2056.</li>
+        <li><strong>Plan data:</strong> Phase 1 buyout schedule and Phase 2 paydown trajectory as detailed in the 10-Year Plan section below. Long-term anchors (2046, 2056, 2066, 2069) per the same model. Peak debt of $61T at Year 4 (2030) reflects the buyout obligation being converted from off-balance-sheet liability into transparent sovereign debt; buyout payments complete by Year 5.</li>
+        <li><strong>Plan refinancing:</strong> Assumes 1.0% refinanced interest rate. Justification: see "Why 1% Interest Is Achievable" panel below.</li>
+        <li><strong>Limitations:</strong> Status-quo line treats current law as projected; does not model recession, fiscal crisis, or policy changes other than what CBO assumes. Plan line assumes successful execution of buyout, NST collection, and refinancing — each non-trivial.</li>
+      </ul>
     </div>
   </section>
 
@@ -326,5 +349,141 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+  (function() {
+    const colors = { navy: '#0e3348', gold: '#b8860b', red: '#c0392b' };
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    // Plan trajectory anchors (gross federal debt, $T) — sourced directly from
+    // the 10-Year Plan tables and milestone list later on this page.
+    const planAnchors = {
+      2026: 39.0, 2027: 45.3, 2028: 50.7, 2029: 55.8, 2030: 60.7,
+      2031: 60.4, 2032: 60.1, 2033: 59.7, 2034: 59.3, 2035: 58.9, 2036: 58.4,
+      2046: 50.5, 2056: 35.0, 2066: 8.6, 2069: 0.0
+    };
+    const planYears = Object.keys(planAnchors).map(Number).sort((a, b) => a - b);
+    function planAt(y) {
+      if (planAnchors[y] !== undefined) return planAnchors[y];
+      for (let i = 0; i < planYears.length - 1; i++) {
+        const lo = planYears[i], hi = planYears[i + 1];
+        if (lo <= y && y <= hi) return lerp(planAnchors[lo], planAnchors[hi], (y - lo) / (hi - lo));
+      }
+      return 0;
+    }
+
+    // Status quo: CBO 2026 LTBO debt-held-by-public anchors, % of GDP.
+    function cboPct(y) {
+      if (y <= 2030) return lerp(1.01, 1.08, (y - 2026) / 4);
+      if (y <= 2036) return lerp(1.08, 1.20, (y - 2030) / 6);
+      if (y <= 2046) return lerp(1.20, 1.44, (y - 2036) / 10);
+      return lerp(1.44, 1.75, (y - 2046) / 10);
+    }
+    // Intragov holdings: ~$9T in FY2026, linear to $0 by FY2034 (trust fund depletion).
+    function intragov(y) {
+      if (y <= 2026) return 9;
+      if (y >= 2034) return 0;
+      return 9 * (2034 - y) / 8;
+    }
+    function statusQuoAt(y) {
+      const gdp = 29.7 * Math.pow(1.037, y - 2026);
+      return cboPct(y) * gdp + intragov(y);
+    }
+
+    const labels = [], planData = [], sqData = [];
+    for (let y = 2026; y <= 2056; y++) {
+      labels.push(String(y));
+      planData.push(+planAt(y).toFixed(1));
+      sqData.push(+statusQuoAt(y).toFixed(1));
+    }
+    // Extrapolate status quo 2057–2069 at the 2046–2056 trend.
+    const trendRate = Math.pow(statusQuoAt(2056) / statusQuoAt(2046), 1 / 10);
+    const sq2056 = statusQuoAt(2056);
+    for (let y = 2057; y <= 2069; y++) {
+      labels.push(String(y));
+      planData.push(+planAt(y).toFixed(1));
+      sqData.push(+(sq2056 * Math.pow(trendRate, y - 2056)).toFixed(1));
+    }
+
+    const planPointRadius = labels.map(y => (y === '2030' || y === '2069') ? 5 : 0);
+
+    new Chart(document.getElementById('debtChoiceChart'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Status Quo (CBO baseline)',
+            data: sqData,
+            borderColor: colors.red,
+            borderWidth: 3,
+            borderDash: [6, 4],
+            fill: false,
+            tension: 0.25,
+            pointRadius: 0,
+            pointHoverRadius: 5
+          },
+          {
+            label: 'The 10% NST Plan',
+            data: planData,
+            borderColor: colors.navy,
+            backgroundColor: 'rgba(14,51,72,0.10)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.3,
+            pointRadius: planPointRadius,
+            pointBackgroundColor: colors.gold,
+            pointBorderColor: colors.navy,
+            pointBorderWidth: 2,
+            pointHoverRadius: 6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { font: { family: "'DM Sans', sans-serif", size: 12 }, usePointStyle: true, pointStyle: 'rectRounded', padding: 16 }
+          },
+          tooltip: {
+            callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(1) + 'T' }
+          },
+          annotation: {
+            annotations: {
+              peakLabel: {
+                type: 'label',
+                xValue: '2030',
+                yValue: 60.7,
+                yAdjust: -28,
+                content: ['Peak: $61T (Year 4)'],
+                backgroundColor: colors.gold,
+                borderColor: colors.navy,
+                borderWidth: 1,
+                borderRadius: 4,
+                color: '#0e3348',
+                font: { family: "'DM Sans', sans-serif", size: 11, weight: '600' },
+                padding: { top: 6, bottom: 6, left: 8, right: 8 },
+                position: { x: 'center', y: 'center' }
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: '#e8e5e0' },
+            ticks: { autoSkip: true, maxTicksLimit: 8, maxRotation: 0, font: { family: "'DM Sans', sans-serif", size: 11 } }
+          },
+          y: {
+            title: { display: true, text: 'National Debt ($ Trillions)', font: { family: "'DM Sans', sans-serif" } },
+            grid: { color: '#e8e5e0' },
+            beginAtZero: true,
+            ticks: { callback: v => '$' + v + 'T', font: { family: "'DM Sans', sans-serif", size: 11 } }
+          }
+        }
+      }
+    });
+  })();
+  </script>
 </body>
 </html>
