@@ -4,7 +4,24 @@ const toggle = document.querySelector('.nav-toggle');
 const links = document.querySelector('.nav-links');
 toggle?.addEventListener('click', () => { links?.classList.toggle('open'); });
 document.querySelectorAll('.nav-dropdown-trigger').forEach(trigger => {
-  trigger.addEventListener('click', (e) => { if (window.innerWidth <= 900) { e.preventDefault(); trigger.closest('.nav-dropdown')?.classList.toggle('open'); } });
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (window.innerWidth <= 900) {
+      const dd = trigger.closest('.nav-dropdown');
+      const open = dd?.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+  });
+});
+document.addEventListener('click', (e) => {
+  if (window.innerWidth > 900) return;
+  document.querySelectorAll('.nav-dropdown.open').forEach(dd => {
+    if (!dd.contains(e.target)) {
+      dd.classList.remove('open');
+      dd.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+    }
+  });
 });
 document.querySelectorAll('.nav-links a:not(.nav-dropdown-trigger)').forEach(link => { link.addEventListener('click', () => { links?.classList.remove('open'); }); });
 const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('animate-in'); observer.unobserve(entry.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
