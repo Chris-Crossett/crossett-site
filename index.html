@@ -37,6 +37,7 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 </head>
 <body>
 
@@ -153,25 +154,35 @@
           <div class="stat-item"><div class="number" style="color:var(--color-gold);">1%</div><div class="desc">Refinanced interest rate</div></div>
         </div>
 
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>10% NST Revenue</td><td>$1.84T</td><td>$1.90T</td><td>$1.97T</td><td>$2.04T</td><td>$2.11T</td></tr>
-              <tr><td>Defense</td><td>$0.70T</td><td>$0.60T</td><td>$0.50T</td><td>$0.35T</td><td>$1.03T</td></tr>
-              <tr><td>All Other Government</td><td>$0.70T</td><td>$0.50T</td><td>$0.35T</td><td>$0.20T</td><td>$0.20T</td></tr>
-              <tr><td>Medicaid (sunset Year 1)</td><td>$0.60T</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-              <tr class="row-highlight"><td>Operating Surplus</td><td>-$0.16T</td><td>$0.80T</td><td>$1.12T</td><td>$1.49T</td><td>$0.87T</td></tr>
-              <tr class="row-negative"><td>Interest Expense (1%)</td><td>-$0.39T</td><td>-$0.45T</td><td>-$0.51T</td><td>-$0.56T</td><td>-$0.61T</td></tr>
-              <tr><td>Asset Liquidations</td><td>+$1.00T</td><td>+$1.00T</td><td>+$1.00T</td><td>+$1.00T</td><td>—</td></tr>
-              <tr class="row-negative"><td>Buyout Payments</td><td>-$6.75T</td><td>-$6.75T</td><td>-$6.75T</td><td>-$6.75T</td><td>—</td></tr>
-              <tr class="row-highlight"><td>Net Cash Flow</td><td>-$6.30T</td><td>-$5.40T</td><td>-$5.14T</td><td>-$4.82T</td><td>+$0.27T</td></tr>
-              <tr><td><strong>Ending Debt</strong></td><td><strong>$45.3T</strong></td><td><strong>$50.7T</strong></td><td><strong>$55.8T</strong></td><td><strong>$60.7T</strong></td><td><strong>$60.4T</strong></td></tr>
-            </tbody>
-          </table>
+        <div class="chart-container">
+          <div class="chart-title">Phase 1 Cash Flow vs. Debt Trajectory</div>
+          <div class="chart-subtitle">Where the money comes from and goes, Years 1–5</div>
+          <canvas id="phase1Chart"></canvas>
+          <div class="chart-source">All figures from the schedule below; 1.0% refinanced interest assumed.</div>
         </div>
+
+        <details class="phase-table-disclosure">
+          <summary>Show full Year-by-Year schedule</summary>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>10% NST Revenue</td><td>$1.84T</td><td>$1.90T</td><td>$1.97T</td><td>$2.04T</td><td>$2.11T</td></tr>
+                <tr><td>Defense</td><td>$0.70T</td><td>$0.60T</td><td>$0.50T</td><td>$0.35T</td><td>$1.03T</td></tr>
+                <tr><td>All Other Government</td><td>$0.70T</td><td>$0.50T</td><td>$0.35T</td><td>$0.20T</td><td>$0.20T</td></tr>
+                <tr><td>Medicaid (sunset Year 1)</td><td>$0.60T</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                <tr class="row-highlight"><td>Operating Surplus</td><td>-$0.16T</td><td>$0.80T</td><td>$1.12T</td><td>$1.49T</td><td>$0.87T</td></tr>
+                <tr class="row-negative"><td>Interest Expense (1%)</td><td>-$0.39T</td><td>-$0.45T</td><td>-$0.51T</td><td>-$0.56T</td><td>-$0.61T</td></tr>
+                <tr><td>Asset Liquidations</td><td>+$1.00T</td><td>+$1.00T</td><td>+$1.00T</td><td>+$1.00T</td><td>—</td></tr>
+                <tr class="row-negative"><td>Buyout Payments</td><td>-$6.75T</td><td>-$6.75T</td><td>-$6.75T</td><td>-$6.75T</td><td>—</td></tr>
+                <tr class="row-highlight"><td>Net Cash Flow</td><td>-$6.30T</td><td>-$5.40T</td><td>-$5.14T</td><td>-$4.82T</td><td>+$0.27T</td></tr>
+                <tr><td><strong>Ending Debt</strong></td><td><strong>$45.3T</strong></td><td><strong>$50.7T</strong></td><td><strong>$55.8T</strong></td><td><strong>$60.7T</strong></td><td><strong>$60.4T</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
 
         <ul class="phase-outcomes">
           <li>Every worker receives a <strong>Personal Social Security Ledger</strong> — total contributions vs. benefits received</li>
@@ -200,22 +211,32 @@
           <div class="stat-item"><div class="number">$2.2T</div><div class="desc">Debt reduction from peak</div></div>
         </div>
 
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr><th></th><th>Year 6</th><th>Year 7</th><th>Year 8</th><th>Year 9</th><th>Year 10</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>10% NST Revenue</td><td>$2.18T</td><td>$2.26T</td><td>$2.34T</td><td>$2.42T</td><td>$2.50T</td></tr>
-              <tr><td>Defense (3% GDP)</td><td>$1.07T</td><td>$1.11T</td><td>$1.15T</td><td>$1.19T</td><td>$1.23T</td></tr>
-              <tr><td>All Other Government</td><td>$0.20T</td><td>$0.20T</td><td>$0.20T</td><td>$0.20T</td><td>$0.20T</td></tr>
-              <tr class="row-highlight-navy"><td>Operating Surplus</td><td>$0.91T</td><td>$0.95T</td><td>$0.99T</td><td>$1.03T</td><td>$1.08T</td></tr>
-              <tr class="row-negative"><td>Interest Expense (1%)</td><td>-$0.60T</td><td>-$0.60T</td><td>-$0.60T</td><td>-$0.59T</td><td>-$0.59T</td></tr>
-              <tr class="row-highlight-navy"><td>Net Debt Paydown</td><td>$0.31T</td><td>$0.35T</td><td>$0.39T</td><td>$0.44T</td><td>$0.49T</td></tr>
-              <tr><td><strong>Ending Debt</strong></td><td><strong>$60.1T</strong></td><td><strong>$59.7T</strong></td><td><strong>$59.3T</strong></td><td><strong>$58.9T</strong></td><td><strong>$58.4T</strong></td></tr>
-            </tbody>
-          </table>
+        <div class="chart-container">
+          <div class="chart-title">Phase 2 Surplus &amp; Debt Paydown</div>
+          <div class="chart-subtitle">Operating surplus grows, debt bends down, Years 6–10</div>
+          <canvas id="phase2Chart"></canvas>
+          <div class="chart-source">All figures from the schedule below; 1.0% refinanced interest assumed.</div>
         </div>
+
+        <details class="phase-table-disclosure">
+          <summary>Show full Year-by-Year schedule</summary>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th></th><th>Year 6</th><th>Year 7</th><th>Year 8</th><th>Year 9</th><th>Year 10</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>10% NST Revenue</td><td>$2.18T</td><td>$2.26T</td><td>$2.34T</td><td>$2.42T</td><td>$2.50T</td></tr>
+                <tr><td>Defense (3% GDP)</td><td>$1.07T</td><td>$1.11T</td><td>$1.15T</td><td>$1.19T</td><td>$1.23T</td></tr>
+                <tr><td>All Other Government</td><td>$0.20T</td><td>$0.20T</td><td>$0.20T</td><td>$0.20T</td><td>$0.20T</td></tr>
+                <tr class="row-highlight-navy"><td>Operating Surplus</td><td>$0.91T</td><td>$0.95T</td><td>$0.99T</td><td>$1.03T</td><td>$1.08T</td></tr>
+                <tr class="row-negative"><td>Interest Expense (1%)</td><td>-$0.60T</td><td>-$0.60T</td><td>-$0.60T</td><td>-$0.59T</td><td>-$0.59T</td></tr>
+                <tr class="row-highlight-navy"><td>Net Debt Paydown</td><td>$0.31T</td><td>$0.35T</td><td>$0.39T</td><td>$0.44T</td><td>$0.49T</td></tr>
+                <tr><td><strong>Ending Debt</strong></td><td><strong>$60.1T</strong></td><td><strong>$59.7T</strong></td><td><strong>$59.3T</strong></td><td><strong>$58.9T</strong></td><td><strong>$58.4T</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
 
         <ul class="phase-outcomes">
           <li>No Social Security. No Medicare. No income tax. No corporate tax. No IRS.</li>
@@ -442,6 +463,7 @@
         responsive: true,
         interaction: { mode: 'index', intersect: false },
         plugins: {
+          datalabels: { display: false },
           legend: {
             position: 'top',
             labels: { font: { family: "'DM Sans', sans-serif", size: 12 }, usePointStyle: true, pointStyle: 'rectRounded', padding: 16 }
@@ -479,6 +501,251 @@
             grid: { color: '#e8e5e0' },
             beginAtZero: true,
             ticks: { callback: v => '$' + v + 'T', font: { family: "'DM Sans', sans-serif", size: 11 } }
+          }
+        }
+      }
+    });
+  })();
+  </script>
+  <script>
+  (function() {
+    const colors = { navy: '#0e3348', gold: '#b8860b', red: '#c0392b', teal: '#148f77', gray: '#6e7681' };
+    const fmtSigned = (v) => (v > 0 ? '+' : '-') + '$' + Math.abs(v).toFixed(2) + 'T';
+
+    // ---------- Phase 1 ----------
+    const phase1Ops = {
+      defense:  [0.70, 0.60, 0.50, 0.35, 1.03],
+      other:    [0.70, 0.50, 0.35, 0.20, 0.20],
+      medicaid: [0.60, 0.00, 0.00, 0.00, 0.00]
+    };
+    const opsTotal = phase1Ops.defense.map((d, i) => -(d + phase1Ops.other[i] + phase1Ops.medicaid[i]));
+
+    new Chart(document.getElementById('phase1Chart'), {
+      type: 'bar',
+      data: {
+        labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+        datasets: [
+          {
+            label: 'NST Revenue',
+            data: [1.84, 1.90, 1.97, 2.04, 2.11],
+            backgroundColor: colors.navy,
+            stack: 'cash',
+            yAxisID: 'cash',
+            order: 1,
+            datalabels: {
+              color: '#fff',
+              font: { family: "'DM Sans', sans-serif", size: 10, weight: '600' },
+              formatter: fmtSigned,
+              display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0
+            }
+          },
+          {
+            label: 'Asset Liquidations',
+            data: [1.00, 1.00, 1.00, 1.00, 0],
+            backgroundColor: colors.gold,
+            stack: 'cash',
+            yAxisID: 'cash',
+            order: 1,
+            datalabels: {
+              color: '#0e3348',
+              font: { family: "'DM Sans', sans-serif", size: 10, weight: '600' },
+              formatter: fmtSigned,
+              display: (ctx) => ctx.dataset.data[ctx.dataIndex] > 0
+            }
+          },
+          {
+            label: 'Government Operations',
+            data: opsTotal,
+            backgroundColor: colors.teal,
+            stack: 'cash',
+            yAxisID: 'cash',
+            order: 1,
+            datalabels: { display: false }
+          },
+          {
+            label: 'Interest Expense',
+            data: [-0.39, -0.45, -0.51, -0.56, -0.61],
+            backgroundColor: colors.gray,
+            stack: 'cash',
+            yAxisID: 'cash',
+            order: 1,
+            datalabels: { display: false }
+          },
+          {
+            label: 'Buyout Payments',
+            data: [-6.75, -6.75, -6.75, -6.75, 0],
+            backgroundColor: colors.red,
+            stack: 'cash',
+            yAxisID: 'cash',
+            order: 1,
+            datalabels: {
+              color: '#fff',
+              font: { family: "'DM Sans', sans-serif", size: 10, weight: '600' },
+              formatter: fmtSigned,
+              display: (ctx) => ctx.dataset.data[ctx.dataIndex] < 0
+            }
+          },
+          {
+            label: 'Ending Debt',
+            type: 'line',
+            data: [45.3, 50.7, 55.8, 60.7, 60.4],
+            borderColor: colors.navy,
+            backgroundColor: 'rgba(14,51,72,0.05)',
+            borderWidth: 3,
+            pointBackgroundColor: colors.gold,
+            pointBorderColor: colors.navy,
+            pointBorderWidth: 2,
+            pointRadius: 5,
+            tension: 0.25,
+            yAxisID: 'debt',
+            order: 0,
+            datalabels: { display: false }
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { font: { family: "'DM Sans', sans-serif", size: 11 }, usePointStyle: true, pointStyle: 'rectRounded', padding: 12, boxWidth: 12 }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                const v = ctx.parsed.y;
+                if (ctx.dataset.label === 'Ending Debt') return ctx.dataset.label + ': $' + v.toFixed(1) + 'T';
+                return ctx.dataset.label + ': ' + fmtSigned(v);
+              },
+              afterLabel: function(ctx) {
+                if (ctx.dataset.label !== 'Government Operations') return null;
+                const i = ctx.dataIndex;
+                const lines = [];
+                if (phase1Ops.defense[i]  > 0) lines.push('  Defense: -$'   + phase1Ops.defense[i].toFixed(2)  + 'T');
+                if (phase1Ops.other[i]    > 0) lines.push('  All Other: -$' + phase1Ops.other[i].toFixed(2)    + 'T');
+                if (phase1Ops.medicaid[i] > 0) lines.push('  Medicaid: -$'  + phase1Ops.medicaid[i].toFixed(2) + 'T');
+                return lines;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            grid: { color: '#e8e5e0' },
+            ticks: { autoSkip: true, maxTicksLimit: 8, maxRotation: 0, font: { family: "'DM Sans', sans-serif", size: 11 } }
+          },
+          cash: {
+            type: 'linear',
+            position: 'left',
+            stacked: true,
+            title: { display: true, text: 'Cash Flow ($T)', font: { family: "'DM Sans', sans-serif" } },
+            grid: { color: '#e8e5e0' },
+            ticks: { callback: v => '$' + v + 'T', font: { family: "'DM Sans', sans-serif", size: 11 } }
+          },
+          debt: {
+            type: 'linear',
+            position: 'right',
+            min: 30,
+            max: 70,
+            title: { display: true, text: 'Ending Debt ($T)', font: { family: "'DM Sans', sans-serif" } },
+            grid: { display: false },
+            ticks: { callback: v => '$' + v + 'T', font: { family: "'DM Sans', sans-serif", size: 11 } }
+          }
+        }
+      }
+    });
+
+    // ---------- Phase 2 ----------
+    const phase2 = {
+      revenue:  [2.18, 2.26, 2.34, 2.42, 2.50],
+      surplus:  [0.91, 0.95, 0.99, 1.03, 1.08],
+      interest: [-0.60, -0.60, -0.60, -0.59, -0.59],
+      paydown:  [0.31, 0.35, 0.39, 0.44, 0.49],
+      debt:     [60.1, 59.7, 59.3, 58.9, 58.4]
+    };
+
+    new Chart(document.getElementById('phase2Chart'), {
+      type: 'bar',
+      data: {
+        labels: ['Year 6', 'Year 7', 'Year 8', 'Year 9', 'Year 10'],
+        datasets: [
+          {
+            label: 'Net Debt Paydown',
+            data: phase2.paydown,
+            backgroundColor: colors.gold,
+            yAxisID: 'paydown',
+            order: 1,
+            borderRadius: 4
+          },
+          {
+            label: 'Ending Debt',
+            type: 'line',
+            data: phase2.debt,
+            borderColor: colors.navy,
+            backgroundColor: 'rgba(14,51,72,0.10)',
+            borderWidth: 3,
+            fill: true,
+            pointBackgroundColor: colors.gold,
+            pointBorderColor: colors.navy,
+            pointBorderWidth: 2,
+            pointRadius: 5,
+            tension: 0.25,
+            yAxisID: 'debt',
+            order: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          datalabels: { display: false },
+          legend: {
+            position: 'top',
+            labels: { font: { family: "'DM Sans', sans-serif", size: 12 }, usePointStyle: true, pointStyle: 'rectRounded', padding: 16 }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                const v = ctx.parsed.y;
+                if (ctx.dataset.label === 'Ending Debt') return ctx.dataset.label + ': $' + v.toFixed(1) + 'T';
+                return ctx.dataset.label + ': ' + fmtSigned(v);
+              },
+              afterBody: function(ctxs) {
+                const i = ctxs[0].dataIndex;
+                return [
+                  '',
+                  'Operating Surplus: ' + fmtSigned(phase2.surplus[i]),
+                  'Interest Expense: '  + fmtSigned(phase2.interest[i])
+                ];
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: '#e8e5e0' },
+            ticks: { autoSkip: true, maxTicksLimit: 8, maxRotation: 0, font: { family: "'DM Sans', sans-serif", size: 11 } }
+          },
+          paydown: {
+            type: 'linear',
+            position: 'left',
+            beginAtZero: true,
+            max: 0.6,
+            title: { display: true, text: 'Net Debt Paydown ($T)', font: { family: "'DM Sans', sans-serif" } },
+            grid: { color: '#e8e5e0' },
+            ticks: { callback: v => '$' + v.toFixed(1) + 'T', font: { family: "'DM Sans', sans-serif", size: 11 } }
+          },
+          debt: {
+            type: 'linear',
+            position: 'right',
+            min: 57,
+            max: 61,
+            title: { display: true, text: 'Ending Debt ($T)', font: { family: "'DM Sans', sans-serif" } },
+            grid: { display: false },
+            ticks: { callback: v => '$' + v.toFixed(1) + 'T', font: { family: "'DM Sans', sans-serif", size: 11 } }
           }
         }
       }
