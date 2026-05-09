@@ -144,6 +144,16 @@ a:hover { color: var(--color-gold); }
 .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin: var(--space-xl) 0; }
 @media (max-width: 768px) { .chart-grid { grid-template-columns: 1fr; } }
 .chart-source { font-size: 0.75rem; color: var(--color-ink-muted); margin-top: var(--space-sm); text-align: right; font-style: italic; }
+.footnote-ref { text-decoration: none; color: var(--color-accent); font-weight: 500; padding: 0 2px; border-radius: var(--radius-sm); transition: background var(--transition); }
+.footnote-ref:hover { background: var(--color-gold-soft); }
+.footnote-ref:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.footnote-ref:target, .footnotes li:target { background: var(--color-gold-soft); }
+.footnotes { margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid var(--color-border-light); font-size: 0.85rem; color: var(--color-ink-soft); max-width: var(--content-width); }
+.footnotes h2 { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-gold); margin-bottom: var(--space-md); }
+.footnotes ol { padding-left: var(--space-lg); line-height: 1.65; }
+.footnotes li { margin-bottom: var(--space-sm); padding: 2px 4px; border-radius: var(--radius-sm); transition: background var(--transition); }
+.footnote-back { text-decoration: none; margin-left: var(--space-xs); color: var(--color-ink-muted); font-size: 0.95em; }
+.footnote-back:hover { color: var(--color-gold); }
 .phase-table-disclosure { margin: var(--space-lg) 0; background: var(--color-white); border: 1px solid var(--color-border-light); border-radius: var(--radius-md); overflow: hidden; }
 .phase-table-disclosure summary { padding: var(--space-md) var(--space-lg); cursor: pointer; font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; color: var(--color-ink); list-style: none; display: flex; align-items: center; justify-content: space-between; user-select: none; }
 .phase-table-disclosure summary::-webkit-details-marker { display: none; }
